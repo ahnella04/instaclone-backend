@@ -1,9 +1,17 @@
 require("dotenv").config(); // .env 파일에서 정보 읽어오기
-import schema from "./schema.js";
+import { typeDefs, resolvers } from "./schema.js";
 import { ApolloServer } from "apollo-server";
+import { getUser, protectResolver } from "./users/users.utils.js";
 
 const server = new ApolloServer({
-  schema
+  resolvers,
+  typeDefs,
+  context: async ({ req }) => {
+    return {
+      loggedInUser: await getUser(req.headers.token),
+      protectResolver
+    }
+  }
 });
 
 const PORT = process.env.PORT;

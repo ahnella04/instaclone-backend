@@ -18,7 +18,7 @@ export default {
         // hash password
         const uglyPassword = await bcrypt.hash(password, 10);
         // save and return the user
-        return client.user.create({
+        await client.user.create({
           data: {
             username,
             email,
@@ -27,9 +27,15 @@ export default {
             password: uglyPassword
           }
         });
+        return {
+          ok: true,
+        }
       } catch (e) {
         // 어떤 에러가 생기든 catch 발생
-        return e;
+        return {
+          ok: false,
+          error: "Cant create account."
+        }
       }
     }
   }

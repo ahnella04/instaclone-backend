@@ -9,5 +9,3 @@ const loadedResolvers = loadFilesSync(`${__dirname}/**/*.resolvers.js`);
 
 export const typeDefs = mergeTypeDefs(loadedTypes);
 export const resolvers = mergeResolvers(loadedResolvers);
-
-

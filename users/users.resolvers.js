@@ -1,31 +1,34 @@
-import { ExitStatus } from "typescript";
 import client from "../client";
 
 export default {
     User: {
-        totalFollowing: ({ id }) => client.user.count({ where: {
-            followers: {
-                some: {
-                    id
-                }
-            } // 내가 그들의 팔로우 리스트에 있다면 내가 그들을 팔로잉하고 있다는 것을 알 수 있음
-        }}),
-        totalFollowers: ({ id }) => client.user.count({ where: {
-            following: {
-                some: {
-                    id
+        totalFollowing: ({ id }) => client.user.count({
+            where: {
+                followers: {
+                    some: {
+                        id
+                    }
+                } // 내가 그들의 팔로우 리스트에 있다면 내가 그들을 팔로잉하고 있다는 것을 알 수 있음
+            }
+        }),
+        totalFollowers: ({ id }) => client.user.count({
+            where: {
+                following: {
+                    some: {
+                        id
+                    }
                 }
             }
-        }}), // 내 id를 자신의 팔로우 리스트에 가지고 있는 사람
-        isMe: ({ id }, _, {loggedInUser}) => {
+        }), // 내 id를 자신의 팔로우 리스트에 가지고 있는 사람
+        isMe: ({ id }, _, { loggedInUser }) => {
             console.log(id, loggedInUser)
-            if(!loggedInUser) {
+            if (!loggedInUser) {
                 return false;
             }
             return id === loggedInUser.id;
         },
-        isFollowing: async ({id}, _, {loggedInUser}) => {
-            if(!loggedInUser) {
+        isFollowing: async ({ id }, _, { loggedInUser }) => {
+            if (!loggedInUser) {
                 return false;
             }
             const exists = await client.user.count({

@@ -43,7 +43,8 @@ export default {
             })
             return Boolean(exists)
         } // exist.length === 1 이면 user를 팔로잉
-    }
+    },
+    photos: ({ id }) => client.user.findUnique({ where: { id } }).photos()
 } // totalFollowing의 parent = User
 // graphql은 이 두 field를 데이터베이스에서 찾은 user로 resolve 하려 할 것
 

@@ -1,13 +1,13 @@
 import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
+import { processHashtags } from "../photos.utils";
 
 export default {
     Mutation: {
         uploadPhoto: protectedResolver(async (_, { file, caption }, { loggedInUser }) => {
             let hashtagObj = null;
             if (caption) {
-                const hashtags = caption.match(/#[\w]+/g);
-                hashtagObj = hashtags.map(hashtag => ({ where: { hashtag }, create: { hashtag } }))
+                hashtagObj = processHashtags(caption);
             }
             return await client.photo.create({
                 data: {

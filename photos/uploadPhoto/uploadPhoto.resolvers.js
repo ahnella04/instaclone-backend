@@ -5,11 +5,11 @@ import { processHashtags } from "../photos.utils";
 export default {
     Mutation: {
         uploadPhoto: protectedResolver(async (_, { file, caption }, { loggedInUser }) => {
-            let hashtagObj = null;
+            let hashtagObj = [];
             if (caption) {
                 hashtagObj = processHashtags(caption);
             }
-            return await client.photo.create({
+            return client.photo.create({
                 data: {
                     file,
                     caption,

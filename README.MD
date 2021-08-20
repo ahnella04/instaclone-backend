@@ -19,15 +19,21 @@ Instaclone Backend.
 
 - [x] See Photos
 - [x] Upload Photo (Parse #)
-- [ ] Edit Photo
-- [ ] Like / Unlike Photo
-- [ ] See Photo Likes
-- [ ] See Feed
-- [ ] Search Photos
-- [ ] See Hashtags
+- [x] Edit Photo
+- [x] Like / Unlike Photo
+- [x] See Photo Likes
+- [x] See Photo Comments
+- [x] Is Mine (Delete Photo)
+- [x] See Feed
+- [x] Search Photos
+- [x] See Hashtags
 
 ## Comments
 
-- [ ] Comment on Photo
-- [ ] Edit Comment
-- [ ] Delete Comment
+- [x] Comment on Photo
+- [x] Edit Comment
+- [x] Delete Comment (IsMine)
+
+## Extras
+
+- [ ] S3 Image Upload

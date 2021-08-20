@@ -1,41 +1,45 @@
-import client from "../client"
-
+import client from "../client";
 export default {
     Photo: {
-        user: ({ id }) => {
-            return client.user
-                .findUnique({ where: { id: userId } })
-        },
+        user: ({ userId }) => client.user.findUnique({ where: { id: userId } }),
         hashtags: ({ id }) =>
             client.hashtag.findMany({
                 where: {
                     photos: {
                         some: {
-                            id
-                        }
-                    }
-                }
-            })
+                            id,
+                        },
+                    },
+                },
+            }),
+        likes: ({ id }) => client.like.count({ where: { photoId: id } }),
+        comments: ({ id }) => client.comment.count({ where: { photoId: id } }),
+        isMine: ({ userId }, _, { loggedInUser }) => {
+            if (!loggedInUser) {
+                return false
+            }
+            return userId === loggedInUser.id;
+        }
     },
     Hashtag: {
         photos: ({ id }, { page }, { loggedInUser }) => {
-            // console.log(args)
             return client.hashtag
                 .findUnique({
                     where: {
-                        id
-                    }
-                }).photos()
-        }, // pagination
+                        id,
+                    },
+                })
+                .photos();
+        },
         totalPhotos: ({ id }) =>
-            client.hashtag.count({
+            client.photo.count({
                 where: {
                     hashtags: {
                         some: {
-                            id
-                        }
-                    }
-                }
-            }) // 이 id를 가진 해시태그가 hashtags 리스트에 포함 돼 있는 사진들을 모두 count
-    }
-}
+                            id,
+                        },
+                    },
+                },
+            }),
+    },
+};

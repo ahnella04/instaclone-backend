@@ -31,7 +31,6 @@ export function protectedResolver(ourResolver) {
                     error: "Please log in to perform this action."
                 }
             }
-
         }
         return ourResolver(root, args, context, info);
     };

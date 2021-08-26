@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { GraphQLUpload } from "graphql-upload"
 
 AWS.config.update({
     credentials: {
@@ -6,6 +7,10 @@ AWS.config.update({
         secretAccessKey: process.env.AWS_SECRET
     }
 })
+
+export default {
+    Upload: GraphQLUpload
+}
 
 export const uploadToS3 = async (file, userId, folderName) => {
     const { filename, createReadStream } = await file;

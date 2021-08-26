@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import client from "../../client";
 import { protectedResolver } from "../users.utils";
 import { uploadPhoto } from "../../shared/shared.utils";
+import { GraphQLUpload } from "graphql-upload";
 
 const resolverFn = async (
   _,
@@ -49,6 +50,7 @@ const resolverFn = async (
 };
 
 export default {
+  Upload: GraphQLUpload,
   Mutation: {
     editProfile: protectedResolver(resolverFn),
   },

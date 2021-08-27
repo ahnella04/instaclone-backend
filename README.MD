@@ -43,6 +43,6 @@ Instaclone Backend.
 - [x] See Room
 - [x] Send Message (Create Room)
 - [x] See Rooms
-- [ ] Computed Fields
-- [ ] See Message
-- [ ] Realtime Messages
+- [x] Computed Fields
+- [x] See Message
+- [x] Realtime Messages

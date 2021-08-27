@@ -1,0 +1,1 @@
+export const NEW_MESSAGE = "NEW_MESSAGE"; // 우리가 subscribe하는 이벤트는 새 메세지이고, string
